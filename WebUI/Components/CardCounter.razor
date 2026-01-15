@@ -1,0 +1,61 @@
+﻿<div class="card mb-0">
+    <div class="playing-card">
+        <!-- TODO: styliser la playing-card -->
+        @Label
+    </div>
+    <div class="has-text-centered">
+        @Count
+    </div>
+    <div class="card-footer">
+        <span @onclick="Decrement" class="card-footer-item material-symbols-outlined is-clickable is-unselectable">remove</span>
+        <span @onclick="Increment" class="card-footer-item material-symbols-outlined is-clickable is-unselectable">add</span>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = "";
+
+    [Parameter]
+    public int Count { get; set; }
+
+    [Parameter]
+    public int MaxCount { get; set; }
+
+    [Parameter]
+    public EventCallback<int> CountChanged { get; set; }
+
+    private async Task Decrement()
+    {
+        if (Count <= 0)
+            return;
+
+        Count--;
+        await CountChanged.InvokeAsync(Count);
+    }
+
+    private async Task Increment()
+    {
+        if (Count >= MaxCount)
+            return;
+
+        Count++;
+        await CountChanged.InvokeAsync(Count);
+    }
+}
+
+<style>
+    .playing-card {
+        width: 100%;
+        aspect-ratio: 1/1.5;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: black;
+    }
+</style>

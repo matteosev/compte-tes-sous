@@ -1,0 +1,16 @@
+﻿@page "/"
+
+@inject NavigationManager Navigation
+
+@code {
+    private void NavigateToCount()
+    {
+        Navigation.NavigateTo("/count");
+    }
+}
+
+<PageTitle>Home</PageTitle>
+
+<main class="is-flex is-flex-grow-1 is-align-items-center is-justify-content-center">
+    <button class="button is-large" @onclick="NavigateToCount">Compter mes sous</button>
+</main>

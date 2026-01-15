@@ -1,0 +1,59 @@
+﻿@page "/count"
+
+<PageTitle>Compter mes sous</PageTitle>
+
+<main class="is-flex is-flex-direction-column is-flex-grow-1 mt-3">
+
+    <div class="fixed-grid has-3-cols mb-0">
+        <div class="grid">
+            <div class="cell">
+                <CardCounter Label="5K" @bind-Count="fiveKCount" MaxCount="30"></CardCounter>
+            </div>
+            <div class="cell">
+                <CardCounter Label="10K" @bind-Count="tenKCount" MaxCount="27"></CardCounter>
+            </div>
+            <div class="cell">
+                <CardCounter Label="15K" @bind-Count="fifteenKCount" MaxCount="27"></CardCounter>
+            </div>
+            <div class="cell">
+                <CardCounter Label="20K" @bind-Count="twentyKCount" MaxCount="8"></CardCounter>
+            </div>
+            <div class="cell">
+                <CardCounter Label="25K" @bind-Count="twentyFiveKCount" MaxCount="8"></CardCounter>
+            </div>
+            <div class="cell">
+                <CardCounter Label="50K" @bind-Count="fiftyKCount" MaxCount="4"></CardCounter>
+            </div>
+        </div>
+    </div>
+
+    <div class="is-flex is-flex-grow-1 is-justify-content-center is-align-items-center">
+        <span class="title is-1">@(FormatTotal(CalculateTotal()))</span>
+    </div>
+
+</main>
+
+@code {
+    private int fiveKCount = 10;
+    private int tenKCount = 10;
+    private int fifteenKCount = 10;
+    private int twentyKCount = 4;
+    private int twentyFiveKCount = 4;
+    private int fiftyKCount = 2;
+
+    private int CalculateTotal()
+    {
+        return (fiveKCount * 5000) +
+               (tenKCount * 10000) +
+               (fifteenKCount * 15000) +
+               (twentyKCount * 20000) +
+               (twentyFiveKCount * 25000) +
+               (fiftyKCount * 50000);
+    }
+
+    private string FormatTotal(int total)
+    {
+        return total / 1000 + "K";
+    }
+}
+
