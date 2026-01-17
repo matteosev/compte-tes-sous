@@ -1,14 +1,19 @@
 ﻿<div class="card mb-0">
-    <div class="playing-card">
+    <div class="playing-card is-unselectable">
         <!-- TODO: styliser la playing-card -->
         @Label
     </div>
-    <div class="has-text-centered">
+    <div class="has-text-centered is-unselectable">
         @Count
     </div>
+
     <div class="card-footer">
-        <span @onclick="Decrement" class="card-footer-item material-symbols-outlined is-clickable is-unselectable">remove</span>
-        <span @onclick="Increment" class="card-footer-item material-symbols-outlined is-clickable is-unselectable">add</span>
+        <div class="card-footer-item">
+            <span @onclick="Decrement" class="material-symbols-outlined is-clickable is-unselectable @(IsMin() ? "disabled-button" : "")">remove</span>
+        </div>
+        <div class="card-footer-item">
+            <span @onclick="Increment" class="material-symbols-outlined is-clickable is-unselectable @(IsMax() ? "disabled-button" : "")">add</span>
+        </div>
     </div>
 </div>
 
@@ -27,7 +32,7 @@
 
     private async Task Decrement()
     {
-        if (Count <= 0)
+        if (IsMin())
             return;
 
         Count--;
@@ -36,11 +41,21 @@
 
     private async Task Increment()
     {
-        if (Count >= MaxCount)
+        if (IsMax())
             return;
 
         Count++;
         await CountChanged.InvokeAsync(Count);
+    }
+
+    private bool IsMin()
+    {
+        return Count <= 0;
+    }
+
+    private bool IsMax()
+    {
+        return Count >= MaxCount;
     }
 }
 
@@ -51,11 +66,15 @@
         border: 1px solid #000;
         border-radius: 5px;
         background-color: white;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 24px;
         color: black;
+        border-color: transparent;
+    }
+
+    .disabled-button {
+        opacity: 0.1;
     }
 </style>
