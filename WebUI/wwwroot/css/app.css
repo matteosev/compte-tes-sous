@@ -88,6 +88,15 @@ code {
     text-align: start;
 }
 
-#app {
-    height: 100vh;
+@media (orientation: landscape) {
+    #app {
+        height: 100vh;
+    }
+}
+/* Try to fix the problem that some mobile devices put the adress bar of the browser 
+    at the bottom of the screen so it hides a part of the GUI */
+@media (orientation: portrait) {
+    #app {
+        height: 90vh;
+    }
 }
