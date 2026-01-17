@@ -53,6 +53,12 @@ jobs:
         with:
           html_path: ${{ env.PUBLISH_DIR }}/index.html
           base_href: /compte-tes-sous/
+
+      - name: Rewrite base href for 404.html
+        uses: SteveSandersonMS/ghaction-rewrite-base-href@5b54862a8831e012d4f1a8b2660894415fdde8ec
+        with:
+          html_path: ${{ env.PUBLISH_DIR }}/404.html
+          base_href: /compte-tes-sous/
         
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
